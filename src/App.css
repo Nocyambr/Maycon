@@ -1,0 +1,16 @@
+.mainContainer {
+  padding: 20px;
+}
+
+.tituloCardapio {
+  text-align: center;
+  color: #333;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+  margin-top: 20px;
+}

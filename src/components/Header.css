@@ -1,0 +1,72 @@
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffcc00;
+  position: relative;
+}
+
+.logoTitulo {
+  margin: 0;
+  color: #d32f2f;
+}
+
+.logoSubtitulo {
+  margin: 0;
+  font-weight: bold;
+}
+
+.navMenu {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.navLink:hover {
+  color: #d32f2f; 
+}
+
+.buscaContainer {
+  display: flex;
+  align-items: center;
+}
+
+.buscaInput {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.buscaBotao {
+  padding: 8px;
+  margin-left: 5px;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.buscaBotao:hover {
+  background-color: #555;
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logoImagem {
+  width: 60px;
+}
