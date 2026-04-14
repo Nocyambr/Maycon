@@ -2,7 +2,7 @@ import React from 'react';
 import './Header.css';
 import logoImg from '../assets/logo.png';
 
-function Header() {
+function Header(props) {
   return (
     <header className="headerContainer">
       <div className="logoArea">
@@ -15,9 +15,15 @@ function Header() {
       </div>
 
       <nav className="navMenu">
-        <a href="#inicio" className="navLink">Início</a>
-        <a href="#cardapio" className="navLink">Cardápio</a>
-        <a href="#sobre" className="navLink">Sobre Nós</a>
+        <a className="navLink" style={{ cursor: 'pointer' }} onClick={() => props.mudarPagina("inicio")}>
+          Início
+        </a>
+        <a className="navLink" style={{ cursor: 'pointer' }} onClick={() => props.mudarPagina("cardapio")}>
+          Cardápio
+        </a>
+        <a className="navLink" style={{ cursor: 'pointer' }} onClick={() => props.mudarPagina("sobre")}>
+          Sobre Nós
+        </a>
       </nav>
 
       <div className="buscaContainer">

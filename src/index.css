@@ -5,12 +5,14 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #ffffff;
 }
 
 #root {
   width: 100%;
-  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  max-width: none;
 }
