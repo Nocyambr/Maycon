@@ -1,0 +1,88 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.modalConteudo {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  animation: surgindo 0.3s ease-out;
+}
+
+@keyframes surgindo {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.botaoFechar {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+}
+
+.checkoutCorpo {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.imgCheckout {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  background: #000;
+  border-radius: 15px;
+}
+
+.infoCheckout {
+  flex: 1;
+}
+
+.infoCheckout h2 { color: #d32f2f; margin-bottom: 5px; }
+.precoCheckout { font-size: 24px; font-weight: bold; color: #2e7d32; margin: 10px 0; }
+
+.formCheckout {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.formCheckout input, .formCheckout select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.botaoConfirmar {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.botaoConfirmar:hover { background: #b71c1c; }

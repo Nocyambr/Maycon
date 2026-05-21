@@ -27,8 +27,14 @@ function Header(props) {
       </nav>
 
       <div className="buscaContainer">
-        <input type="text" placeholder="Buscar pastel..." className="buscaInput"/>
-        <button className="buscaBotao">Buscar</button>
+        <input 
+          type="text" 
+          placeholder="Qual pastel você deseja?" 
+          className="buscaInput"
+          value={props.termoBusca}
+          onChange={(e) => props.setTermoBusca(e.target.value)}
+        />
+        <button className="buscaBotao">🔍</button>
       </div>
     </header>
   );

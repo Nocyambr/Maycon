@@ -1,5 +1,11 @@
 *{
   font-family: poppins, sans-serif;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .mainContainer {
@@ -20,4 +26,19 @@
   gap: 50px;
   justify-content: center;
   margin-top: 20px;
+}
+
+@keyframes surgirSuave {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anima-fade {
+  animation: surgirSuave 0.8s ease-out forwards;
 }

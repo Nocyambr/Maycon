@@ -4,22 +4,56 @@ import Card from './components/Card';
 import Inicio from './components/Inicio';
 import Sobre from './components/Sobre';
 import { produtos } from './data/produtos';
+import Banner from './components/Banner';
+import Checkout from './components/Checkout';
+import frangosafado from './assets/frangosafado.png';
 import './App.css';
 
 function App() {
   const [paginaAtual, setPaginaAtual] = useState("inicio");
+  const [termoBusca, setTermoBusca] = useState("");
+  const [produtoEmCompra, setProdutoEmCompra] = useState(null);
 
   function trocarPagina(novaPagina) {
     setPaginaAtual(novaPagina);
+    setTermoBusca("");
   }
+
+  const baseFiltrada = produtos.filter((pastel) => 
+    pastel.nome.toLowerCase().includes(termoBusca.toLowerCase())
+  );
+
+  const produtosFiltrados = termoBusca.toLowerCase().trim() === "frango safado"
+    ? [
+        {
+          nome: "🐔 Frango Safado",
+          preco: "R$ ???? (Secreto)",
+          descricao: "O lendário recheio proibido que não está no cardápio tradicional! Frango ultra desfiado, catupiry transbordando e o tempero misterioso que a banca tentou esconder.",
+          imagem: frangosafado
+        }
+      ]
+    : baseFiltrada;
 
   return (
     <div>
-      {paginaAtual !== "inicio" && (
-        <Header mudarPagina={trocarPagina} />
-      )}
+      <Checkout 
+        produto={produtoEmCompra} 
+        fechar={() => setProdutoEmCompra(null)} 
+        irParaInicio={() => {
+          setProdutoEmCompra(null);
+          trocarPagina("inicio");
+        }}
+      />
 
-      <main className="mainContainer">
+      {paginaAtual !== "inicio" && (
+        <Header 
+          mudarPagina={trocarPagina} 
+          termoBusca={termoBusca}
+          setTermoBusca={setTermoBusca}
+        />
+      )}
+      
+      <main className={`mainContainer ${paginaAtual !== "inicio" ? "anima-fade" : ""}`} key={paginaAtual}>
         
         {paginaAtual === "inicio" && (
           <Inicio mudarParaCardapio={() => trocarPagina("cardapio")} />
@@ -31,18 +65,25 @@ function App() {
 
         {paginaAtual === "cardapio" && (
           <div>
+            <Banner aoClicar={setProdutoEmCompra} />
+            
             <h2 className="tituloCardapio">Nosso Cardápio</h2>
             <div className="cardsContainer">
-              <Card produto={produtos[0]} />
-              <Card produto={produtos[1]} />
-              <Card produto={produtos[2]} />
-              <Card produto={produtos[3]} />
-              <Card produto={produtos[4]} />
-              <Card produto={produtos[5]} />
-              <Card produto={produtos[6]} />
-              <Card produto={produtos[7]} />
-              <Card produto={produtos[8]} />
-              <Card produto={produtos[9]} />
+              
+              {produtosFiltrados.length > 0 ? (
+                produtosFiltrados.map((item, index) => (
+                  <Card 
+                    key={index} 
+                    produto={item} 
+                    aoComprar={() => setProdutoEmCompra(item)} 
+                  />
+                ))
+              ) : (
+                <p style={{ textAlign: 'center', width: '100%', fontSize: '18px', color: '#555' }}>
+                  Nenhum pastel encontrado com esse nome! 😢
+                </p>
+              )}
+
             </div>
           </div>
         )}
