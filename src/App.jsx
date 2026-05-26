@@ -6,6 +6,7 @@ import Sobre from './components/Sobre';
 import { produtos } from './data/produtos';
 import Banner from './components/Banner';
 import Checkout from './components/Checkout';
+import Footer from './components/Footer';
 import frangosafado from './assets/frangosafado.png';
 import './App.css';
 
@@ -89,6 +90,7 @@ function App() {
         )}
 
       </main>
+      {(paginaAtual === "cardapio" || paginaAtual === "sobre") && <Footer />}
     </div>
   );
 }
