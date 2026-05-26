@@ -90,7 +90,11 @@ function App() {
         )}
 
       </main>
+<<<<<<< HEAD
       {(paginaAtual === "cardapio" || paginaAtual === "sobre") && <Footer />}
+=======
+      <Footer />
+>>>>>>> ac817e4211dc6ce14d58604b3b473b390c04cc6c
     </div>
   );
 }
