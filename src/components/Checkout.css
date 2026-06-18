@@ -86,6 +86,7 @@
 }
 
 .botaoConfirmar:hover { background: #b71c1c; }
+
 .sucessoOverlay {
   position: fixed;
   inset: 0;

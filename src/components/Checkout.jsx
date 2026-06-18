@@ -47,35 +47,27 @@ function Checkout({ produto, fechar, aoFinalizarSucesso }) {
   return (
     <div className="modalOverlay">
       <div className="modalConteudo">
-        <button className="botaoFechar" onClick={handleFechar}>
-          &times;
-        </button>
-
+        <button className="botaoFechar" onClick={handleFechar}>&times;</button>
+        
         <div className="checkoutCorpo">
           <img src={produto.imagem} alt={produto.nome} className="imgCheckout" />
-
+          
           <div className="infoCheckout">
             <h2>Finalizar Pedido</h2>
             <h3>{produto.nome}</h3>
             <p className="precoCheckout">{produto.preco}</p>
-
+            
             <form className="formCheckout" onSubmit={handleConfirmar}>
               <input type="text" placeholder="Seu nome completo" required />
-              <input
-                type="text"
-                placeholder="Endereço de Entrega (Rua, Número, Bairro)"
-                required
-              />
-
+              <input type="text" placeholder="Endereço de Entrega (Rua, Número, Bairro)" required />
+              
               <select required defaultValue="">
-                <option value="" disabled>
-                  Selecione a Forma de Pagamento
-                </option>
+                <option value="" disabled>Selecione a Forma de Pagamento</option>
                 <option value="cartao">Cartão de Crédito / Débito</option>
                 <option value="pix">Pix</option>
                 <option value="dinheiro">Dinheiro</option>
               </select>
-
+              
               <button type="submit" className="botaoConfirmar">
                 Confirmar Pedido
               </button>

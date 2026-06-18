@@ -19,6 +19,11 @@ function App() {
   function trocarPagina(novaPagina) {
     setPaginaAtual(novaPagina);
     setTermoBusca("");
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   useEffect(() => {
@@ -36,7 +41,7 @@ function App() {
     setNotificacaoPedido(true);
   }
 
-  const baseFiltrada = produtos.filter((pastel) =>
+  const baseFiltrada = produtos.filter((pastel) => 
     pastel.nome.toLowerCase().includes(termoBusca.toLowerCase())
   );
 
@@ -53,9 +58,9 @@ function App() {
 
   return (
     <div>
-      <Checkout
-        produto={produtoEmCompra}
-        fechar={() => setProdutoEmCompra(null)}
+      <Checkout 
+        produto={produtoEmCompra} 
+        fechar={() => setProdutoEmCompra(null)} 
         aoFinalizarSucesso={mostrarPedidoPreparando}
       />
 
@@ -66,14 +71,15 @@ function App() {
       )}
 
       {paginaAtual !== "inicio" && (
-        <Header
-          mudarPagina={trocarPagina}
+        <Header 
+          mudarPagina={trocarPagina} 
           termoBusca={termoBusca}
           setTermoBusca={setTermoBusca}
         />
       )}
-
+      
       <main className={`mainContainer ${paginaAtual !== "inicio" ? "anima-fade" : ""}`} key={paginaAtual}>
+        
         {paginaAtual === "inicio" && (
           <Inicio mudarParaCardapio={() => trocarPagina("cardapio")} />
         )}
@@ -85,16 +91,16 @@ function App() {
         {paginaAtual === "cardapio" && (
           <div>
             <Banner aoClicar={setProdutoEmCompra} />
-
+            
             <h2 className="tituloCardapio">Nosso Cardápio</h2>
-
             <div className="cardsContainer">
+              
               {produtosFiltrados.length > 0 ? (
                 produtosFiltrados.map((item, index) => (
-                  <Card
-                    key={index}
-                    produto={item}
-                    aoComprar={() => setProdutoEmCompra(item)}
+                  <Card 
+                    key={index} 
+                    produto={item} 
+                    aoComprar={() => setProdutoEmCompra(item)} 
                   />
                 ))
               ) : (
@@ -102,11 +108,12 @@ function App() {
                   Nenhum pastel encontrado com esse nome! 😢
                 </p>
               )}
+
             </div>
           </div>
         )}
-      </main>
 
+      </main>
       {(paginaAtual === "cardapio" || paginaAtual === "sobre") && <Footer />}
     </div>
   );
