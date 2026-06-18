@@ -42,3 +42,38 @@
 .anima-fade {
   animation: surgirSuave 0.8s ease-out forwards;
 }
+
+.notificacaoPedido {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2500;
+  background: #fff;
+  color: #1f2933;
+  border-left: 6px solid #00a650;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  padding: 16px 22px;
+  font-size: 16px;
+  font-weight: 700;
+  animation: notificacaoPedidoSuave 3.5s ease-in-out forwards;
+}
+
+@keyframes notificacaoPedidoSuave {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  12% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  78% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}

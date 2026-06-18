@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Card from './components/Card';
 import Inicio from './components/Inicio';
@@ -14,13 +14,29 @@ function App() {
   const [paginaAtual, setPaginaAtual] = useState("inicio");
   const [termoBusca, setTermoBusca] = useState("");
   const [produtoEmCompra, setProdutoEmCompra] = useState(null);
+  const [notificacaoPedido, setNotificacaoPedido] = useState(false);
 
   function trocarPagina(novaPagina) {
     setPaginaAtual(novaPagina);
     setTermoBusca("");
   }
 
-  const baseFiltrada = produtos.filter((pastel) => 
+  useEffect(() => {
+    if (!notificacaoPedido) return undefined;
+
+    const tempoNotificacao = setTimeout(() => {
+      setNotificacaoPedido(false);
+    }, 3500);
+
+    return () => clearTimeout(tempoNotificacao);
+  }, [notificacaoPedido]);
+
+  function mostrarPedidoPreparando() {
+    setProdutoEmCompra(null);
+    setNotificacaoPedido(true);
+  }
+
+  const baseFiltrada = produtos.filter((pastel) =>
     pastel.nome.toLowerCase().includes(termoBusca.toLowerCase())
   );
 
@@ -37,25 +53,27 @@ function App() {
 
   return (
     <div>
-      <Checkout 
-        produto={produtoEmCompra} 
-        fechar={() => setProdutoEmCompra(null)} 
-        irParaInicio={() => {
-          setProdutoEmCompra(null);
-          trocarPagina("inicio");
-        }}
+      <Checkout
+        produto={produtoEmCompra}
+        fechar={() => setProdutoEmCompra(null)}
+        aoFinalizarSucesso={mostrarPedidoPreparando}
       />
 
+      {notificacaoPedido && (
+        <div className="notificacaoPedido" role="status" aria-live="polite">
+          Seu pedido está sendo preparado
+        </div>
+      )}
+
       {paginaAtual !== "inicio" && (
-        <Header 
-          mudarPagina={trocarPagina} 
+        <Header
+          mudarPagina={trocarPagina}
           termoBusca={termoBusca}
           setTermoBusca={setTermoBusca}
         />
       )}
-      
+
       <main className={`mainContainer ${paginaAtual !== "inicio" ? "anima-fade" : ""}`} key={paginaAtual}>
-        
         {paginaAtual === "inicio" && (
           <Inicio mudarParaCardapio={() => trocarPagina("cardapio")} />
         )}
@@ -67,16 +85,16 @@ function App() {
         {paginaAtual === "cardapio" && (
           <div>
             <Banner aoClicar={setProdutoEmCompra} />
-            
+
             <h2 className="tituloCardapio">Nosso Cardápio</h2>
+
             <div className="cardsContainer">
-              
               {produtosFiltrados.length > 0 ? (
                 produtosFiltrados.map((item, index) => (
-                  <Card 
-                    key={index} 
-                    produto={item} 
-                    aoComprar={() => setProdutoEmCompra(item)} 
+                  <Card
+                    key={index}
+                    produto={item}
+                    aoComprar={() => setProdutoEmCompra(item)}
                   />
                 ))
               ) : (
@@ -84,17 +102,12 @@ function App() {
                   Nenhum pastel encontrado com esse nome! 😢
                 </p>
               )}
-
             </div>
           </div>
         )}
-
       </main>
-<<<<<<< HEAD
+
       {(paginaAtual === "cardapio" || paginaAtual === "sobre") && <Footer />}
-=======
-      <Footer />
->>>>>>> ac817e4211dc6ce14d58604b3b473b390c04cc6c
     </div>
   );
 }
